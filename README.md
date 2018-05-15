@@ -84,11 +84,17 @@ kubectl apply -f part1/wordpress-storage-class.yaml
 ```
 ### 3. Inspect the Storage class 
 
+- Review the storage class to be created
 ```bash
 kubectl get storageclass 
 kubectl edit storageclass wordpress-meetup
 kubectl describe sc  wordpress-meetup
 ```
+
+- Review the Nimble
+
+[Path to Nimble URL](https://172.20.2.110)
+
 
 ### 3. Inspect the helm chart that is being used to deploy initial chart 
 
@@ -102,9 +108,13 @@ kubectl describe sc  wordpress-meetup
 helm install --name meetup-demo-01 --dry-run --debug meetup-helm-chart
 ```
 
-### 4. Perform the helm chart dry run to see the output
+### 5. Install the helm chart
 
-- Before installating the chart review logs on the kube-controller and search for ```action=POST path=http://unix/VolumeDriver.Create payload```
+- Before installating the chart review logs on the kube-controller and search for 
+
+```action=POST path=http://unix/VolumeDriver.Create payload```
+
+- Install the helm chart with the ```dc1``` enviromental variable set
 
 ```bash
 kubectl log kube-storage-controller-doryd-d4676c4db-jvhtm -n kube-system -f
@@ -114,8 +124,15 @@ kubectl log kube-storage-controller-doryd-d4676c4db-jvhtm -n kube-system -f
 
 ```bash
 kubectl get persistentvolumeclaim
+kubectl edit pvc <pvcname>
 ```
 
+- Review the PV
+
+```bash
+kubectl get pv
+kubectl edit pv <pvname>
+```
 
 
 
