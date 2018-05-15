@@ -34,7 +34,7 @@ spec:
           - mountPath: "/var/lib/mysql/data"
             name: {{ template "fullname" .}}-mysql-storage
       volumes:
-        - name: {{ template "fullname" .}}-mysql-storage
+        - name: {{ template "fullname" .}}mysql-storage
           persistentVolumeClaim:
             claimName: {{ template "fullname" .}}-aws-db-storage-pvc
 {{ end }}
@@ -42,9 +42,9 @@ spec:
 {{ if eq .Values.environment "dc1"}}
           volumeMounts:
           - mountPath: "/var/lib/mysql/data"
-            name: {{ template "fullname" .}}-mysql-storage
+            name: {{ template "fullname" .}}mysql-storage
       volumes:
-        - name: {{ template "fullname" .}}-mysql-storage
+        - name: {{ template "fullname" .}}mysql-storage
           persistentVolumeClaim:
             claimName: {{ template "fullname" .}}-dc1-db-storage-pvc
 {{ end }}

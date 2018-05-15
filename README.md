@@ -123,8 +123,10 @@ action=POST path=http://unix/VolumeDriver.Create payload
 - Install the helm chart with the ```dc1``` enviromental variable set
 
 ```bash 
-helm install --name wordpress-issue-01  --set environment="dc1" meetup-helm-chart
+helm install --name wordpress-meetup-01  --set environment="dc1" meetup-helm-chart
 ```
+
+### 7. Review the volumes that are created
 
 - Review the PVC and PV created
 
@@ -150,24 +152,29 @@ docker volume ls
 docker volume inspect <dockervolume>
 ```
 
-- Review the Volume Created on the Nimble
+### 8. Review the Volume Created on the Nimble
 
 [Path to Nimble URL](https://172.20.2.110)
 
 ### 6. Navigate to the application  URL 
 
+```bash
+kubectl get svc
 ```
 
+# Cloning
+
+### 1. Determine the volume you are going to clone 
+
+```
+kubectl get pvc
 ```
 
+### 2. Add that to the clone storage class
 
-
-
-
-
-
-
-
+``
+- [path to meetup-helm-chart](https://github.com/mugithi/meetup-may-15-18/tree/master/part2)
+meetup-storage-class-00-54f9558b-5889-11e8-a0d5-e89a8f4ff60e
 
 
 

@@ -2,6 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 environment: "aws"
+deploy: "new"
 replicaCount: 1
 image:
   repository: nginx
@@ -35,3 +36,6 @@ resources: {}
   #requests:
   #  cpu: 100m
   #  memory: 128Mi
+
+
+

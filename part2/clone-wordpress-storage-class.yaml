@@ -3,11 +3,11 @@
 apiVersion: storage.k8s.io/v1beta1
 kind: StorageClass
 metadata:
-  name: clone-wordpress-meetup
+  name: clone-meetup-storage-class-00
 provisioner: hpe.com/nimble
 parameters:
     destroyOnRm: "true"
     mountConflictDelay: "30"
     folder: "kubernetes"
-    cloneOf: "wordpress-meetup-1257c48b-580f-11e8-a0d5-e89a8f4ff60e"
+    cloneOf: "meetup-storage-class-00-54f9558b-5889-11e8-a0d5-e89a8f4ff60e"  #Change this with the pv that you want to clone
 

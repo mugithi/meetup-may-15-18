@@ -80,3 +80,5 @@ spec:
 
         - name: WORDPRESS_DB_HOST
           value: {{ template "fullname" .}}-db-service
+
+
