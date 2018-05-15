@@ -32,9 +32,25 @@
 ## At the end of the meetup we will be raffling away Google AYI kits
 
 
+# MEETUP DORY IMPLEMENTATION
+
+### 1. Installation documentation 
+
+[Link to Isaack's guide Installation documentation](https://docs.google.com/document/d/1g8EPzMipes3Z2tHblRY_2PpxQUc8nABWoa6uVSll4s0/edit?usp=sharing)
+
+### 2. Installed components 
+
+- The kube-storage-controller(FlexVolume)
+
+```bash
+kubectl get po --namespace=kube-system | grep kube-storage-controller
+```
+- Tailing the logs
+```bash
+kubectl log kube-storage-controller-doryd-d4676c4db-jz6jz -n kube-system -f
+```
 
 # MEETUP DEMO
-
 
 ### 1. Inspect the Nimble storage kubernetes storage class 
 
@@ -61,9 +77,19 @@ parameters:
 
 ### 2. Create the storage class that references Nimble Storage
 
+```bash
+kubectl apply -f part1/wordpress-storage-class.yaml
 ```
-kubectl apply -f wordpress-storage-class.yaml
+### 3. Inspect the Storage class 
+
+```bash
+kubectl get storageclass 
+kubectl edit storageclass wordpress-meetup
 ```
+
+
+
+
 
 ### 3. Inspect the helm chart that is being used to deploy initial chart 
 
