@@ -1,5 +1,8 @@
 {{ if .Values.ingress.enabled }}
 {{ if .Values.environment }}
+
+## Create an ingress controller if the enviromental variable is aws
+
 {{ if eq .Values.environment "aws"}}
 apiVersion: extensions/v1beta1
 kind: Ingress

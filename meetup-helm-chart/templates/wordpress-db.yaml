@@ -27,9 +27,7 @@ spec:
                 secretKeyRef:
                   name: {{ template "fullname" .}}-secrets
                   key: db-password
-      
 {{ if .Values.environment }}
-
 # Perform a persistant volume claim against AWS if the enviroment is AWS
 {{ if eq .Values.environment "aws"}}
           volumeMounts:
@@ -40,7 +38,6 @@ spec:
           persistentVolumeClaim:
             claimName: {{ template "fullname" .}}-aws-db-storage-pvc
 {{ end }}
-
 # Perform a persistant volume claim against DC1 if the enviroment is DC1
 {{ if eq .Values.environment "dc1"}}
           volumeMounts:

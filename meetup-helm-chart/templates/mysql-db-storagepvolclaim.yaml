@@ -1,4 +1,7 @@
 {{ if .Values.environment }}
+
+## What do if the enviromental variable is dc1
+
 {{ if eq .Values.environment "aws"}}
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -13,6 +16,7 @@ spec:
       storage: 8Gi
 {{ end }}
 
+## What do if the enviromental variable is dc1
 
 {{ if eq .Values.environment "dc1"}}
 apiVersion: v1
