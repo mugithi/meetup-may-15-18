@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: {{ template "fullname" .}}-app
+spec:
+  replicas: {{ .Values.replicaCount}}
+  template:
+    metadata:
+      labels:
+        app: {{ template "fullname" .}}-app
+    spec:
+      containers:
+      - name: wordpress
+        image: wordpress:4-php7.0
+        ports:
+          - name: http-port
+            containerPort: 80
+        #HealthCheck
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http-port
+          initialDelaySeconds: 15
+          timeoutSeconds: 30
+        #Secrets
+        env:
+        - name: WORDPRESS_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "fullname" .}}-secrets
+              key: db-password
+
+        - name: WORDPRESS_AUTH_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "fullname" .}}-secrets
+              key: authkey
+
+        - name: WORDPRESS_LOGGED_IN_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "fullname" .}}-secrets
+              key: loggedinkey
+
+        - name: WORDPRESS_SECURE_AUTH_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "fullname" .}}-secrets
+              key: secureauthkey
+
+        - name: WORDPRESS_NON_CE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "fullname" .}}-secrets
+              key: noncekey
+
+        - name: WORDPRESS_AUTH_SALT
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "fullname" .}}-secrets
+              key: authsalt
+
+        - name: WORDPRESS_SECURE_AUTH_SALT
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "fullname" .}}-secrets
+              key: secureauthsalt
+
+        - name: WORDPRESS_LOGGED_IN_SALT
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "fullname" .}}-secrets
+              key: loggedinsalt
+
+        - name: WORDPRESS_NON_CE_SALT
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "fullname" .}}-secrets
+              key: noncesalt
+
+        - name: WORDPRESS_DB_HOST
+          value: {{ template "fullname" .}}-db-service

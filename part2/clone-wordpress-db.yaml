@@ -1,0 +1,88 @@
+---
+# Source: meetup/templates/wordpress-secrets.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: clone-wordpress-meetup-secrets
+type: Opaque
+data:
+  db-password: MURhc2hlcg==
+  authkey: da50ef77b0e1c4059bea9a28434f771be0662dab
+  loggedinkey: da50ef77b0e1c4059bea9a28434f771be0662dab
+  secureauthkey: da50ef77b0e1c4059bea9a28434f771be0662dab
+  noncekey: da50ef77b0e1c4059bea9a28434f771be0662dab
+  authsalt: da50ef77b0e1c4059bea9a28434f771be0662dab
+  secureauthsalt: da50ef77b0e1c4059bea9a28434f771be0662dab
+  loggedinsalt: da50ef77b0e1c4059bea9a28434f771be0662dab
+  noncesalt: da50ef77b0e1c4059bea9a28434f771be0662dab
+
+---
+# Source: meetup/templates/wordpress-db-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: clone-wordpress-meetup-db-service
+spec:
+  ports:
+    - port: 3306
+      protocol: TCP
+  selector:
+    app: clone-wordpress-meetup-db
+  type: NodePort
+
+---
+# Source: meetup/templates/wordpress-db.yaml
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: clone-wordpress-meetup-db
+spec:
+  replicas: 1
+  selector:
+    app: clone-wordpress-meetup-db
+  template:
+    metadata:
+      name: clone-wordpress-meetup-db
+      labels:
+        app: clone-wordpress-meetup-db
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:5.6
+          args:
+            - "--ignore-db-dir=lost+found"
+          ports:
+            - name: msyql-port
+              containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: clone-wordpress-meetup-secrets
+                  key: db-password
+
+
+# Perform a persistant volume claim against DC1 if the enviroment is DC1
+
+          volumeMounts:
+          - mountPath: "/var/lib/mysql/data"
+            name: mysql-storage
+      volumes:
+        - name: mysql-storage
+          persistentVolumeClaim:
+            claimName: clone-wordpress-meetup-dc1-db-storage-pvc
+---
+# Source: meetup/templates/mysql-db-storagepvolclaim.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: clone-wordpress-meetup-dc1-db-storage-pvc
+spec:
+  storageClassName: clone-wordpress-meetup
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+
+

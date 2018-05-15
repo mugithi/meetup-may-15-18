@@ -1,0 +1,30 @@
+# {{ if .Values.environment }}
+# {{ if eq .Values.environment "aws"}}
+# apiVersion: storage.k8s.io/v1beta1
+# kind: StorageClass
+#  metadata:
+#  name: {{ template "fullname" .}}
+# provisioner: kubernetes.io/aws-ebs
+#  parameters:
+#    type: gp2
+#    zone: us-east-1a
+# {{ end }}
+
+
+# {{ if eq .Values.environment "dc1"}}
+# apiVersion: storage.k8s.io/v1beta1
+# kind: StorageClass
+# metadata:
+#   name: {{ template "fullname" .}}
+#   annotations:
+#     storageclass.kubernetes.io/is-default-class: "true"
+# provisioner: hpe.com/nimble
+# parameters:
+#     thick: "false"
+#     dedupe: "false"
+#     perfPolicy: "SQL Server"
+#     destroyOnRm: "true" 
+#     mountConflictDelay: "10"
+#     protectionTemplate: "Retain-30Daily" 
+# {{ end }}
+# {{ end }}

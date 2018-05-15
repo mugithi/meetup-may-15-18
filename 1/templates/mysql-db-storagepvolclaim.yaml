@@ -1,0 +1,30 @@
+{{ if .Values.environment }}
+{{ if eq .Values.environment "aws"}}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ template "fullname" .}}-aws-db-storage-pvc
+spec:
+  storageClassName: {{ template "fullname" .}}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+{{ end }}
+
+
+{{ if eq .Values.environment "dc1"}}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ template "fullname" .}}-dc1-db-storage-pvc
+spec:
+  storageClassName: wordpress-meetup
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+{{ end }}
+{{ end }}

@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: {{ template "fullname" .}}-db
+spec:
+  replicas: 1
+  selector:
+    app: {{ template "fullname" .}}-db
+  template:
+    metadata:
+      name: {{ template "fullname" .}}-db
+      labels:
+        app: {{ template "fullname" .}}-db
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: mysql
+          image: mysql:5.6
+          args:
+            - "--ignore-db-dir=lost+found"
+          ports:
+            - name: msyql-port
+              containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fullname" .}}-secrets
+                  key: db-password
+      
+{{ if .Values.environment }}
+
+# Perform a persistant volume claim against AWS if the enviroment is AWS
+{{ if eq .Values.environment "aws"}}
+          volumeMounts:
+          - mountPath: "/var/lib/mysql/data"
+            name: mysql-storage
+      volumes:
+        - name: mysql-storage
+          persistentVolumeClaim:
+            claimName: {{ template "fullname" .}}-aws-db-storage-pvc
+{{ end }}
+
+# Perform a persistant volume claim against DC1 if the enviroment is DC1
+{{ if eq .Values.environment "dc1"}}
+          volumeMounts:
+          - mountPath: "/var/lib/mysql/data"
+            name: mysql-storage
+      volumes:
+        - name: mysql-storage
+          persistentVolumeClaim:
+            claimName: {{ template "fullname" .}}-dc1-db-storage-pvc
+{{ end }}
+
+
+{{ end }}

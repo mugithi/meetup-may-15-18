@@ -1,0 +1,27 @@
+{{ if .Values.ingress.enabled }}
+{{ if .Values.environment }}
+{{ if eq .Values.environment "aws"}}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ template "fullname" .}}-wordpress-service
+{{ if .Values.ingress.annotations }}
+  annotations:
+{{ toYaml .Values.ingress.annotations | indent 4 }}
+{{ end }}
+spec:
+  tls:
+  - hosts:
+    - {{ .Values.ingress.hosts }}
+    secretName: {{ .Values.ingress.tls.secretName }}
+  rules:
+    - host: {{ .Values.ingress.hosts }}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: {{ template "fullname" .}}-wordpress-service
+              servicePort: 80
+{{ end }}
+{{ end }}
+{{ end }}
