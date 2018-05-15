@@ -11,7 +11,7 @@ Password: *********
 
 ## Agenda
 
-- **5:30 PM: Social Networking:**
+**5:30 PM: Social Networking:**
 
 **6:00 – 6:30 PM: Isaack**
 
