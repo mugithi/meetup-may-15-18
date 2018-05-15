@@ -49,7 +49,7 @@ kubectl get po --namespace=kube-system | grep kube-storage-controller
 - Tailing the logs
 
 ```bash
-kubectl log kube-storage-controller-doryd-d4676c4db-jz6jz -n kube-system -f
+kubectl log kube-storage-controller-doryd-d4676c4db-jvhtm -n kube-system -f
 ```
 
 # MEETUP DEMO
@@ -87,18 +87,37 @@ kubectl apply -f part1/wordpress-storage-class.yaml
 ```bash
 kubectl get storageclass 
 kubectl edit storageclass wordpress-meetup
+kubectl describe sc  wordpress-meetup
 ```
 
 ### 3. Inspect the helm chart that is being used to deploy initial chart 
 
 - [path to meetup-helm-chart](https://github.com/mugithi/meetup-may-15-18/tree/master/meetup-helm-chart)
 - Review that there is **NO** storageClass defined in the helm chart - needs to be pre-created
+- Review the values enviroment option , dc1 (hardcoded) and aws
 
 ### 4. Perform the helm chart dry run to see the output
 
 ```basb
 helm install --name meetup-demo-01 --dry-run --debug meetup-helm-chart
 ```
+
+### 4. Perform the helm chart dry run to see the output
+
+- Before installating the chart review logs on the kube-controller and search for ```action=POST path=http://unix/VolumeDriver.Create payload```
+
+```bash
+kubectl log kube-storage-controller-doryd-d4676c4db-jvhtm -n kube-system -f
+```
+
+- Review the PVC and PV created
+
+```bash
+kubectl get persistentvolumeclaim
+```
+
+
+
 
 
 
