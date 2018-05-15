@@ -112,7 +112,8 @@ helm install --name meetup-demo-01 --dry-run --debug meetup-helm-chart
 
 - Before installating the chart review logs on the kube-controller and search for 
 
-```action=POST path=http://unix/VolumeDriver.Create payload
+```
+action=POST path=http://unix/VolumeDriver.Create payload
 ```
 
 - Install the helm chart with the ```dc1``` enviromental variable set
