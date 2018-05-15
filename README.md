@@ -112,14 +112,18 @@ helm install --name meetup-demo-01 --dry-run --debug meetup-helm-chart
 
 - Before installating the chart review logs on the kube-controller and search for 
 
+```bash
+kubectl log kube-storage-controller-doryd-d4676c4db-jvhtm -n kube-system -f
+```
+
 ```
 action=POST path=http://unix/VolumeDriver.Create payload
 ```
 
 - Install the helm chart with the ```dc1``` enviromental variable set
 
-```bash
-kubectl log kube-storage-controller-doryd-d4676c4db-jvhtm -n kube-system -f
+```bash 
+helm install --name wordpress-issue-01  --set environment="dc1" meetup-helm-chart
 ```
 
 - Review the PVC and PV created
@@ -151,6 +155,10 @@ docker volume inspect <dockervolume>
 [Path to Nimble URL](https://172.20.2.110)
 
 ### 6. Navigate to the application  URL 
+
+```
+
+```
 
 
 
