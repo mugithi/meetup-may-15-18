@@ -67,7 +67,7 @@ kubectl apply -f wordpress-storage-class.yaml
 
 ### 3. Inspect the helm chart that is being used to deploy initial chart 
 
-- [path to meetup-helm-chart](https://github.com/mugithi/meetup-may-15-18/tree/master/1)
+- [path to meetup-helm-chart](https://github.com/mugithi/meetup-may-15-18/tree/master/meetup-helm-chart)
 - Review that there is storage class defined in the helm chart - needs to be pre-created
 
 ### 4. Perform the helm chart dry run to see the output
