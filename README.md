@@ -136,6 +136,16 @@ kubectl get pv
 kubectl edit pv <pvname>
 ```
 
+- Log into the master and review the docker volume
+
+```bash
+docker volume ls
+```
+
+```bash
+docker volume inspect <dockervolume>
+```
+
 - Review the Volume Created on the Nimble
 
 [Path to Nimble URL](https://172.20.2.110)
