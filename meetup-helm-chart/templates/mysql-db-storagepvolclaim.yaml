@@ -24,7 +24,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ template "fullname" .}}-dc1-db-storage-pvc
 spec:
-  storageClassName: {{ template "fullname" .}}
+  storageClassName: meetup-storage-class-00
   accessModes:
     - ReadWriteOnce
   resources:
