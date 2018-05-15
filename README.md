@@ -6,8 +6,8 @@
 
 ## Wireless
 
-- SSID: dt-meetup
-- Password: *********
+- SSID: DT-Meetup 
+- Password: dasher@meetup
 
 
 ## Agenda
