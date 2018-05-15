@@ -172,10 +172,14 @@ kubectl get pvc
 
 ### 2. Add that to the clone storage class
 
-``
 - [path to meetup-helm-chart](https://github.com/mugithi/meetup-may-15-18/tree/master/part2)
-meetup-storage-class-00-54f9558b-5889-11e8-a0d5-e89a8f4ff60e
 
+
+### 3. Deploy a new database
+
+```
+kubectl apply -f part2/clone-wordpress-db.yaml
+```
 
 
 

@@ -78,7 +78,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: clone-wordpress-meetup-dc1-db-storage-pvc
 spec:
-  storageClassName: clone-wordpress-meetup
+  storageClassName: clone-meetup-storage-class-00
   accessModes:
     - ReadWriteOnce
   resources:
