@@ -45,7 +45,9 @@
 ```bash
 kubectl get po --namespace=kube-system | grep kube-storage-controller
 ```
+
 - Tailing the logs
+
 ```bash
 kubectl log kube-storage-controller-doryd-d4676c4db-jz6jz -n kube-system -f
 ```
@@ -87,14 +89,10 @@ kubectl get storageclass
 kubectl edit storageclass wordpress-meetup
 ```
 
-
-
-
-
 ### 3. Inspect the helm chart that is being used to deploy initial chart 
 
 - [path to meetup-helm-chart](https://github.com/mugithi/meetup-may-15-18/tree/master/meetup-helm-chart)
-- Review that there is storage class defined in the helm chart - needs to be pre-created
+- Review that there is **NO** storageClass defined in the helm chart - needs to be pre-created
 
 ### 4. Perform the helm chart dry run to see the output
 
