@@ -1,7 +1,8 @@
+# PLAN OF THE DAY 
+
 ## Address 
 
-675 Campbell Technology Parkway, Campbell CA, Suite 100
-
+[675 Campbell Technology Parkway, Campbell CA, Suite 100](https://goo.gl/maps/RN8dsQekX352)
 
 ## Wireless
 
@@ -26,13 +27,13 @@ Password: *********
 **7:00 - 7:30: Josh**
 - Managing Kubernetes on AWS the easy way
 
-Pizza and Beer will be provided
+#### Pizza and Beer will be provided
 
-At the end of the meetup we will be raffling away Google AYI kits
+##### At the end of the meetup we will be raffling away Google AYI kits
 
 
 
-## Demo
+# Demo
 
 
 
